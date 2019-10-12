@@ -5,8 +5,7 @@ const place = 'London'
 const getWeatherByLocationName = async (location = place) => {
     try {
        const weather = await weatherByLocationName(location)
-       console.log(weather)
-       
+       return weather
     } catch(error){
         console.log(error)
     }
@@ -17,7 +16,7 @@ const getWeatherByLocationName = async (location = place) => {
 const getCurrentTimeByLocationName = async (location = place) => {
     try{
         const currentTime = await currentTimeByLocationName(location)
-        console.log(currentTime)
+        return currentTime
     } catch(error){
         console.log(error)
     }

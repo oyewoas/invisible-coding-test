@@ -1,3 +1,4 @@
+import moment from 'moment-timezone'
 import { timeZoneByLocationName } from "./timeZone"
 
 
@@ -6,11 +7,11 @@ const timeFromTimeZone = timezone => timezone && typeof timezone === 'string'
 
 const currentTimeByLocationName = async location => {
     try{
-        const timeZone = timeZoneByLocationName(location)
-        const currentTime = timeFromTimeZone(timeZone)
-        console.log(currentTime)
+        const timeZone = await timeZoneByLocationName(location)
+        const currentTime = await timeFromTimeZone(timeZone)
+        return currentTime
     } catch(error) {
-        console.log(error)
+        console.log(error, 'current time by location')
     }
 }
 
