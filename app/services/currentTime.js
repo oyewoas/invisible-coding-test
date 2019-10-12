@@ -8,8 +8,9 @@ const currentTimeByLocationName = async location => {
     try{
         const timeZone = timeZoneByLocationName(location)
         const currentTime = timeFromTimeZone(timeZone)
+        console.log(currentTime)
     } catch(error) {
-
+        console.log(error)
     }
 }
 

@@ -1,5 +1,5 @@
-import { getWeatherByLocationName } from './locationName'
+import { getWeatherByLocationName, getCurrentTimeByLocationName } from './locationName'
 
 export {
-    getWeatherByLocationName
+    getWeatherByLocationName, getCurrentTimeByLocationName
 }
