@@ -1,43 +1,50 @@
-import shell from 'shelljs'
-import { appEntry } from './index'
+import shell from "shelljs";
+import { appEntry } from "./index";
 
-const welcomeNote = () => {
-	console.log(`Welcome, to get weather and current time details, Kindly input the location names and postal codes e.g. Paris, Lisbon, 78009
+const standard_input = process.stdin;
+standard_input.setEncoding("utf-8");
+
+const welcomeMessage = () => {
+  console.log(`Welcome, to get weather and current time details, Kindly input the location names and postal codes e.g. Paris, London, 78009
 	
-	- To restart, enter 'restart'
-	- To clear the screen, enter 'clear'
-	- To exit the program, enter 'exit'`)
-}
+	* To restart the program, enter 'restart'
+	* To clear the screen, enter 'clear'
+	* To exit the program, enter 'exit'`);
+};
 
 const start = () => {
-	const standard_input = process.stdin
-	standard_input.setEncoding('utf-8')
+  welcomeMessage();
 
-	welcomeNote()
+  standard_input.on("data", data => {
+    switch (data) {
+      case "exit\n":
+        console.log("Stopping..., Thanks for using this app");
+        process.exit();
+        break;
+      case "\n":
+        console.log("\n");
+        start();
+        console.log("\n");
+        break;
+      case "clear\n":
+        shell.exec("clear");
+        welcomeMessage();
+        break;
+      case "restart\n":
+        console.log("Restarting...");
+        shell.exec("clear");
+        start();
+        break;
+      default:
+        const formatedData = data
+          .replace(/\n$/, "")
+          .replace(/[^a-zA-Z0-9,^]/g, "")
+          .split(",");
+        console.log("Processing... \n \n");
+        console.log("Response:");
+        appEntry(formatedData);
+    }
+  });
+};
 
-	standard_input.on('data', (data) => {
-
-		if (data === 'exit\n') {
-			console.log("Program stopped. Thanks for coming :-)")
-			process.exit()
-		} else if (data === '\n') {
-			console.log('\n')
-			start()
-			console.log('\n')
-		} else if (data === 'clear\n') {
-			shell.exec('clear')
-			welcomeNote()
-		} else if (data === 'restart\n') { 
-			console.log('Restarting...')
-			shell.exec('clear')
-			start()
-		} else {
-			const cleanData = data.replace(/\n$/, '').replace(/[^a-zA-Z0-9,^]/g, "").split(',')
-			console.log('Loading... \n \n')
-			console.log('Result:')
-			appEntry(cleanData)
-		}
-	})
-}
-
-start()
+start();
