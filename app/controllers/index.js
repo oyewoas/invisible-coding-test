@@ -1,15 +1,15 @@
 import {
   getWeatherByLocationName,
   getCurrentTimeByLocationName
-} from "./locationName";
+} from "./locationName"
 import {
   getWeatherByPostalCode,
   getCurrentTimeByPostalCode
-} from "./postalCode";
+} from "./postalCode"
 
 export {
   getWeatherByLocationName,
   getCurrentTimeByLocationName,
   getCurrentTimeByPostalCode,
   getWeatherByPostalCode
-};
+}
