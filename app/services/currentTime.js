@@ -1,17 +1,19 @@
 import moment from 'moment-timezone'
 import { timeZoneByLocationName } from "./timeZone"
+import { RESPONSE } from '../utils'
 
+const { ERROR } = RESPONSE
 
 const timeFromTimeZone = timezone => timezone && typeof timezone === 'string'
-	? moment().tz(timezone).format('MMMM Do YYYY, h:mm:ss a') : 'Timezone is required'
+	? moment().tz(timezone).format('MMMM Do YYYY, h:mm:ss a') : 'Timezone Could not be retrieved'
 
 const currentTimeByLocationName = async location => {
     try{
         const timeZone = await timeZoneByLocationName(location)
-        const currentTime = await timeFromTimeZone(timeZone)
+        const currentTime = timeFromTimeZone(timeZone)
         return currentTime
     } catch(error) {
-        console.log(error, 'current time by location')
+        return ERROR('An Error occurred while getting current time')
     }
 }
 

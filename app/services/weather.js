@@ -8,7 +8,7 @@ const weatherByLocationName = async location => {
         const { data } = await makeApiCall(url)
         return data
     } catch(error){
-        return error
+        return ERROR('An Error Occured While getting weather')
     }
 
 }

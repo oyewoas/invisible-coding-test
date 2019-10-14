@@ -2,14 +2,14 @@ const SUCCESS = ( status, weather, currentTime ) => {
     const response = {
         message: 'success',
         status,
-        weather: weather[0].main,
+        weather,
         current_time : currentTime
     }
 
     return response
 }
 
-const ERROR = ( status = null, reason = null ) => {
+const ERROR = ( reason = null , status = 400) => {
     const response = {
         message: 'error',
         status,

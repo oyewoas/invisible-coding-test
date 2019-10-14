@@ -19,6 +19,7 @@ const getCurrentTimeByLocationName = async (location = place) => {
         return currentTime
     } catch(error){
         console.log(error)
+        
     }
 };
 

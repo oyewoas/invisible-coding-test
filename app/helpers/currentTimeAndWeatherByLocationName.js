@@ -8,10 +8,18 @@ const currentTimAndWeatherByLocationName = async location => {
         const response = await getWeatherByLocationName(location)
         const currentTime = await getCurrentTimeByLocationName(location)
         const { weather, cod } = response
-        return SUCCESS(cod, weather, currentTime)
+        if ( response && cod === 200){
+            return SUCCESS(cod, weather, currentTime)
+
+        } 
+        else{
+            const { response: {data: { cod , message }}} = response
+            return ERROR(message, cod )
+        }
+       
+        
     } catch(error){
-        const { response: { data: { cod, message }}} = response
-        return ERROR(cod, message)
+        return ERROR('Current time and weather of Location Could not be found, make sure you inputed a valid location', 404)
     }
 }
 

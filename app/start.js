@@ -18,7 +18,6 @@ const start = () => {
 	standard_input.on('data', (data) => {
 
 		if (data === 'exit\n') {
-			// Program exit.
 			console.log("Program stopped. Thanks for coming :-)")
 			process.exit()
 		} else if (data === '\n') {
@@ -27,15 +26,15 @@ const start = () => {
 			console.log('\n')
 		} else if (data === 'clear\n') {
 			shell.exec('clear')
-			infoText()
-		} else if (data === 'restart\n') {
+			welcomeNote()
+		} else if (data === 'restart\n') { 
 			console.log('Restarting...')
 			shell.exec('clear')
-			main()
+			start()
 		} else {
 			const cleanData = data.replace(/\n$/, '').replace(/[^a-zA-Z0-9,^]/g, "").split(',')
-			console.log(`Loading...`)
-			console.log(`Result:`)
+			console.log('Loading... \n \n')
+			console.log('Result:')
 			appEntry(cleanData)
 		}
 	})
