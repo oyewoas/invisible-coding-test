@@ -1,63 +1,51 @@
 import chai from 'chai'
 const { expect } = chai
 
-import { getCurrentTimeAndWeatherByLocationOrPostalCode } from '../index'
+import { logCurrentTimeAndWeatherByLocationNameOrPostalCode } from '../index'
 
-describe('Get the current time and weather for locations', () => {
+describe('Get the current time and weather by location or postal codes', () => {
 	it('should return an error response if input parameter are empty', async () => {
-		const response = await getCurrentTimeAndWeatherByLocationOrPostalCode()
+		const response = await logCurrentTimeAndWeatherByLocationNameOrPostalCode()
 		expect(response).to.exist
 		expect(response).to.be.an('object')
 		expect(response).to.have.property('message').to.equal('error')
+		expect(response).to.have.property('reason').to.equal('Invalid input array, input must be an array of values')
 		expect(response).to.have.property('status').to.equal(400)
 	})
 
 	it('should return an error if input parameter is not an array', async () => {
-		const response = await getCurrentTimeAndWeatherByLocationOrPostalCode(123)
+		const inputArray = 'aadfdfs'
+		const response = await logCurrentTimeAndWeatherByLocationNameOrPostalCode(inputArray)
 		expect(response).to.exist
 		expect(response).to.be.an('object')
 		expect(response).to.have.property('message').to.equal('error')
+		expect(response).to.have.property('reason').to.equal('Invalid input array, input must be an array of values')
 		expect(response).to.have.property('status').to.equal(400)
 	})
 
 	it('should return an error if input param is an empty array', async () => {
-		const response = await getCurrentTimeAndWeatherByLocationOrPostalCode([])
+		const inputArray = []
+		const response = await logCurrentTimeAndWeatherByLocationNameOrPostalCode(inputArray)
 		expect(response).to.exist
 		expect(response).to.be.an('object')
 		expect(response).to.have.property('message').to.equal('error')
+		expect(response).to.have.property('reason').to.equal('Invalid input array, input must be an array of values')
 		expect(response).to.have.property('status').to.equal(400)
 	})
 
-	it('should return an error if input array element is not a string', async () => {
-		const response = await getCurrentTimeAndWeatherByLocationOrPostalCode(['Argentina', 1209, 'London'])
-		expect(response).to.exist
-		expect(response).to.be.an('object')
-		expect(response).to.have.property('message').to.equal('error')
-		expect(response).to.have.property('status').to.equal(400)
-	})
-
-	it('should return an array as a data property of the response', async () => {
-		const values = ['london', 'lagos', 58495, 'paris', 23142]
-		const response = await getCurrentTimeAndWeatherByLocationOrPostalCode(values)
+	it('should return a response if input is valid', async () => {
+		const inputArray = ['Lagos', 78009]
+		try {
+		const response = await logCurrentTimeAndWeatherByLocationNameOrPostalCode(inputArray)
+		console.log(response, 'test res')
 		expect(response).to.exist
 		expect(response).to.be.an('object')
 		expect(response).to.have.property('message').to.equal('success')
 		expect(response).to.have.property('status').to.equal(200)
-		expect(response).to.have.property('data')
-		expect(response.data).to.be.an('array')
-		expect(response.data).to.have.lengthOf(values.length)
-	})
-
-	it('data should have properties weather, currentTime and message', async () => {
-		const values = ['london', 'lagos', 58495, 'paris', 23142]
-		const response = await getCurrentTimeAndWeatherByLocationOrPostalCode(values)
-		expect(response).to.exist
-		expect(response).to.be.an('object')
-		expect(response).to.have.property('data')
-		expect(response.data).to.be.an('array')
-		expect(response.data).to.be.an('object')
-		expect(response.data).to.have.property('weather')
-		expect(response.data).to.have.property('currentTime')
-		expect(response.data).to.have.property('message').to.equal('success')
+		expect(response).to.have.property('weather')
+		expect(response).to.have.property('current_time')
+		} catch(error){
+			return error
+		}
 	})
 })
