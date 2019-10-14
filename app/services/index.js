@@ -1,9 +1,11 @@
-import {currentTimeByLocationName} from './currentTime'
-import { weatherByLocationName } from './weather'
+import {currentTimeByLocationName, currentTimeByPostalCode} from './currentTime'
+import { weatherByLocationName, weatherByPostalCode } from './weather'
 
 
 export {
     currentTimeByLocationName, 
-    weatherByLocationName
+    weatherByLocationName,
+    weatherByPostalCode,
+    currentTimeByPostalCode
 
 }

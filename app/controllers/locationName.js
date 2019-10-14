@@ -1,25 +1,26 @@
 import { currentTimeByLocationName, weatherByLocationName } from "../services"
+import { RESPONSE } from '../utils'
 
-const place = 'London'
+const { ERROR } = RESPONSE
 
-const getWeatherByLocationName = async (location = place) => {
+const getWeatherByLocationName = async location => {
     try {
        const weather = await weatherByLocationName(location)
        return weather
     } catch(error){
-        console.log(error)
+        return ERROR('An error occured when getting weather', 400)
     }
 
 }
 
 
-const getCurrentTimeByLocationName = async (location = place) => {
+const getCurrentTimeByLocationName = async location => {
     try{
         const currentTime = await currentTimeByLocationName(location)
         return currentTime
     } catch(error){
-        console.log(error)
-        
+        return ERROR('An error occured when getting current time', 400)
+
     }
 };
 

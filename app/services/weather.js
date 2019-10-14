@@ -1,4 +1,4 @@
-import { makeApiCall, locationUrl } from "./http"
+import { makeApiCall, locationUrl, postalCodeUrl } from "./http"
 import { RESPONSE } from '../utils'
 
 const { ERROR } = RESPONSE
@@ -13,6 +13,18 @@ const weatherByLocationName = async location => {
 
 }
 
+const weatherByPostalCode = async location => {
+    try {
+        const url = postalCodeUrl(location)
+        const { data } = await makeApiCall(url)
+        return data
+    } catch(error){
+        return ERROR('An Error Occured While getting weather')
+    }
+
+}
+
 export {
-    weatherByLocationName
+    weatherByLocationName,
+    weatherByPostalCode
 }

@@ -24,7 +24,8 @@
     "dotenv": "^8.1.0",
     "esm": "^3.2.25",
     "moment-timezone": "^0.5.26",
-    "shelljs": "^0.8.3"
+    "shelljs": "^0.8.3",
+    "zipcode-to-timezone": "0.0.9"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

@@ -1,5 +1,5 @@
 import moment from 'moment-timezone'
-import { timeZoneByLocationName } from "./timeZone"
+import { timeZoneByLocationName, timeZoneByPostalCode } from "./timeZone"
 import { RESPONSE } from '../utils'
 
 const { ERROR } = RESPONSE
@@ -17,7 +17,17 @@ const currentTimeByLocationName = async location => {
     }
 }
 
+const currentTimeByPostalCode = async postalCode => {
+    try{
+        const timeZone = await timeZoneByPostalCode(postalCode)
+        const currentTime = timeFromTimeZone(timeZone)
+        return currentTime
+    } catch(error) {
+        return ERROR('An Error occurred while getting current time')
+    }
+}
+
 
 export {
-    currentTimeByLocationName
+    currentTimeByLocationName, currentTimeByPostalCode
 }
