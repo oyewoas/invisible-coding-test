@@ -8,7 +8,9 @@
    ```shell
    $ npm install
    ```
-   After installing packages, Start server by running:
+   After installing packages, create `.env` file then add the `OPEN_WEATHER_API_KEY` as seen in `.env-example` into it.
+   
+   Start server by running:
 
    ```shell
    $ npm start
