@@ -35,6 +35,7 @@ describe('Get the current time and weather by location or postal codes', () => {
 
 	it('should return a response if input is valid', async () => {
 		const inputArray = ['Lagos', 78009]
+		try {
 		const response = await logCurrentTimeAndWeatherByLocationNameOrPostalCode(inputArray)
 		console.log(response, 'test res')
 		expect(response).to.exist
@@ -43,5 +44,8 @@ describe('Get the current time and weather by location or postal codes', () => {
 		expect(response).to.have.property('status').to.equal(200)
 		expect(response).to.have.property('weather')
 		expect(response).to.have.property('current_time')
+		} catch(error){
+			return error
+		}
 	})
 })

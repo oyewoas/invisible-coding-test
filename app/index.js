@@ -19,7 +19,6 @@ const logCurrentTimeAndWeatherByLocationNameOrPostalCode = async inputArrayData 
 
         // Get current time and weather by postal code
         if (isPostalCode(element)){
-            console.log(element)
             const postalCode = element
             const response = await currentTimAndWeatherByPostalCode(postalCode)
             console.log(response)
