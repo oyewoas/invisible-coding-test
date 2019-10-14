@@ -1,8 +1,4 @@
-import { currentTimAndWeatherByLocationName } from './currentTimeAndWeatherByLocationName'
-import { currentTimAndWeatherByPostalCode } from './currentTimeAndWeatherByPostalCode'
+import { currentTimAndWeatherByLocationName } from "./currentTimeAndWeatherByLocationName";
+import { currentTimAndWeatherByPostalCode } from "./currentTimeAndWeatherByPostalCode";
 
-
-export {
-    currentTimAndWeatherByLocationName,
-    currentTimAndWeatherByPostalCode
-}
+export { currentTimAndWeatherByLocationName, currentTimAndWeatherByPostalCode };
